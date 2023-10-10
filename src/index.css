@@ -1,0 +1,31 @@
+.active {
+color: red;
+font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  transition: all 300ms ease;
+}
+
+a:hover {
+  color: rgb(255, 0, 0);
+}
+
+select {
+  width: 12rem;
+}
+
+.card-img-top {
+  width: 50%;
+}
+
+.picapica {
+  width: 10rem;
+}
+
+.pokebola {
+  width: 2.5rem;
+  border-radius: 50%;
+}
