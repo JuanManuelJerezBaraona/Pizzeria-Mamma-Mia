@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./views/Home";
 import Pizza from "./views/Pizza";
 import Carrito from "./views/Carrito";
-import Pokemon from "./views/Pokemon";
 
 const App = () => {
 

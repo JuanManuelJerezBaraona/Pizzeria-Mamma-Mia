@@ -9,7 +9,7 @@ import ListGroupItem from 'react-bootstrap/ListGroupItem';
 import Button from 'react-bootstrap/Button';
 
 function Pizza() {
-    const { allPizzas, setAllPizzas, cart, setCart } = useContext(UserContext)
+    const { allPizzas, cart, setCart } = useContext(UserContext)
     const { id } = useParams()
     const navigate = useNavigate()
 
@@ -17,8 +17,14 @@ function Pizza() {
 
     const cartAdd = (pizza) => {
         navigate(`/carrito`)
-        setCart([...cart, pizza])
-      }
+        const existingPizza = cart.find((item) => item.id === pizza.id)
+        if(existingPizza) {
+            existingPizza.quantity = (existingPizza.quantity || 1) + 1
+            setCart([...cart])
+        } else {
+            setCart([...cart, {...pizza, quantity: 1}])
+        }
+    }
 
     return (
         <>
@@ -40,7 +46,7 @@ function Pizza() {
                             </ListGroup>
                         </Card.Body>
                         <Card.Body className="d-flex flex-row align-items-center justify-content-between">
-                            <Card.Title className='text-center'>Precio: ${pizzaInfo.price}</Card.Title>
+                            <Card.Title className='text-center'>Precio: ${(pizzaInfo.price).toLocaleString('es-CL')}</Card.Title>
                             <div className='d-flex justify-content-center gap-2'>
                                 <Button onClick={() => cartAdd(pizzaInfo)} className='bg-danger'>Añadir</Button>
                             </div>

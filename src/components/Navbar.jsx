@@ -1,6 +1,10 @@
 import { NavLink } from "react-router-dom";
+import { useContext, useEffect } from 'react';
+import { UserContext } from '../context/userContext';
 
 const Navbar = () => {
+  const { totalToPay } = useContext(UserContext)
+
   const setActiveClass = ({ isActive }) => (isActive ? "active" : undefined);
   return (
     <div>
@@ -18,7 +22,7 @@ const Navbar = () => {
             to="/carrito"
           >
             {" "}
-            🛒Carrito{" "}
+            🛒${(totalToPay).toLocaleString('es-CL')}{" "}
           </NavLink>
       </nav>
     </div>
