@@ -4,32 +4,22 @@ const Navbar = () => {
   const setActiveClass = ({ isActive }) => (isActive ? "active" : undefined);
   return (
     <div>
-      <nav className="d-flex justify-content-between p-4 bg-secondary text-white">
-        <div>
-          <img 
-            src="https://p1.hiclipart.com/preview/425/772/49/logo-pkmn-center-pokemon-pokeball-logo-png-clipart.jpg" 
-            alt="Logo pokebola" 
-            className="pokebola"
-          />
-        </div>
-
-        <div className="d-flex gap-3">
+      <nav className="bg-info d-flex justify-content-between p-3 px-4 text-white">
           <NavLink
             className={setActiveClass}
             to="/"
           >
             {" "}
-            Home{" "}
+            🍕Pizzería Mamma Mia!{" "}
           </NavLink>
 
           <NavLink
             className={setActiveClass}
-            to="/pokemones"
+            to="/carrito"
           >
             {" "}
-            Pokemones{" "}
+            🛒Carrito{" "}
           </NavLink>
-        </div>
       </nav>
     </div>
   );

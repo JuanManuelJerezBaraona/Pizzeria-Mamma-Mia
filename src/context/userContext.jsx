@@ -3,11 +3,11 @@ import { createContext, useState } from "react";
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-  const [pokemones, setPokemones] = useState([]);
-  const [selectedPokemon, setSelectedPokemon] = useState(null)
+  const [allPizzas, setAllPizzas] = useState([]);
+  const [cart, setCart] = useState([]);
 
   return (
-    <UserContext.Provider value={{ pokemones, setPokemones, selectedPokemon, setSelectedPokemon }}>
+    <UserContext.Provider value={{ allPizzas, setAllPizzas, cart, setCart }}>
       {children}
     </UserContext.Provider>
   );
