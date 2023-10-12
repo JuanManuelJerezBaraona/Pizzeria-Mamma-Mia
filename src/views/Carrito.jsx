@@ -17,10 +17,10 @@ function Carrito() {
 
     const decreaseQuantity = (pizzaId) => {
         const updatedCart = cart.map((pizza) => 
-            pizza.id === pizzaId && pizza.quantity > 1
-            ? {...pizza, quantity: pizza.quantity - 1 }
+            pizza.id === pizzaId
+            ? {...pizza, quantity: (pizza.quantity || 1) - 1 }
             : pizza
-       )
+       ).filter((pizza) => pizza.quantity > 0)
        setCart(updatedCart)
     }
 
@@ -45,14 +45,14 @@ function Carrito() {
                             <p className='text-success m-0'><b>${(pizza.price * (pizza.quantity || 1)).toLocaleString('es-CL')}</b></p>
                             <Button onClick={() => decreaseQuantity(pizza.id)} className='bg-danger'>-</Button>
                             <p className='m-0'><b>{pizza.quantity || 1}</b></p>
-                            <Button onClick={() => increaseQuantity(pizza.id)} className='bg-primary'>+</Button>
+                            <Button onClick={() => increaseQuantity(pizza.id)} className='bg-primary mas'>+</Button>
                         </div>
                     </div>
                 ))}
                 <div className='d-flex flex-column align-items-lg-start align-items-center'>
                     <h3>Total: ${totalToPay}</h3>
                     <div>
-                        <Button className='bg-success'>Ir a Pagar</Button>
+                        <Button className='bg-success pagar'>Ir a Pagar</Button>
                     </div>
                 </div>
             </div>

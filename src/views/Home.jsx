@@ -78,7 +78,7 @@ const Home = () => {
             <Card.Body>
               <Card.Title className='text-center'>Precio: ${(pizza.price).toLocaleString('es-CL')}</Card.Title>
                 <div className='d-flex justify-content-center gap-2'>
-                  <Button onClick={() => handleInfo(pizza.id)} className='bg-info'>Ver Más</Button>
+                  <Button onClick={() => handleInfo(pizza.id)} className='bg-info ver-mas'>Ver Más</Button>
                   <Button onClick={() => cartAdd(pizza)} className='bg-danger'>Añadir</Button>
                 </div>
             </Card.Body>
