@@ -13,15 +13,19 @@ function Pizza() {
     const { id } = useParams()
     const navigate = useNavigate()
 
+    // Encontrar la información de la pizza correspondiente al 'id' de la URL
     const pizzaInfo = allPizzas.find(pizza => pizza.id === id)
 
     const cartAdd = (pizza) => {
         navigate(`/carrito`)
+        // Verificar si la pizza ya está en el carrito
         const existingPizza = cart.find((item) => item.id === pizza.id)
         if(existingPizza) {
+            // Si la pizza ya está en el carrito, incrementar la cantidad
             existingPizza.quantity = (existingPizza.quantity || 1) + 1
             setCart([...cart])
         } else {
+            // Si la pizza no está en el carrito, agregarla con cantidad 1
             setCart([...cart, {...pizza, quantity: 1}])
         }
     }

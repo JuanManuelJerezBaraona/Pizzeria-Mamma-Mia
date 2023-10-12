@@ -18,14 +18,16 @@ function Carrito() {
     const decreaseQuantity = (pizzaId) => {
         const updatedCart = cart.map((pizza) => 
             pizza.id === pizzaId
-            ? {...pizza, quantity: (pizza.quantity || 1) - 1 }
+            ? {...pizza, quantity: (pizza.quantity || 1) - 1 } // Disminuir la cantidad en 1
             : pizza
-       ).filter((pizza) => pizza.quantity > 0)
+       ).filter((pizza) => pizza.quantity > 0) // Filtrar las pizzas con cantidad mayor que 0
        setCart(updatedCart)
     }
 
+    // Calcular el total a pagar sumando el precio de todas las pizzas en el carrito.
     const total = cart.reduce((total, pizza) => total + (pizza.price * (pizza.quantity || 1)), 0)
 
+    // Actualizar el total a pagar cuando cambie el carrito.
     useEffect(() => {
         setTotalToPay((total).toLocaleString('es-CL'))
     }, [cart])

@@ -13,11 +13,16 @@ import Button from 'react-bootstrap/Button';
 import Header from '../components/Header';
 
 const Home = () => {
-  const { allPizzas, setAllPizzas, cart, setCart, setTotalToPay } = useContext(UserContext)
-  const navigate = useNavigate()
+  // Usar useContext para acceder a datos compartidos del usuario
+  const { allPizzas, setAllPizzas, cart, setCart, setTotalToPay } = useContext(UserContext);
 
+  // Inicializar la navegación
+  const navigate = useNavigate();
+
+  // Función para obtener las pizzas (cargar datos iniciales)
   const getPizzas = () => {
     try {
+      // Mapear los datos de pizzas y guardarlos en el estado
       const pizzaArray = pizzas.map(pizza => ({
         id: pizza.id,
         name: pizza.name,
@@ -25,45 +30,52 @@ const Home = () => {
         img: pizza.img,
         price: pizza.price,
         desc: pizza.desc
-      }))
-      setAllPizzas(pizzaArray)
+      }));
+      setAllPizzas(pizzaArray);
     } catch (error) {
       console.error("Error al obtener los datos:", error);
     }
   };
 
+  // Ejecutar getPizzas() cuando el componente se monta
   useEffect(() => {
     getPizzas();
   }, []);
 
+  // Función para manejar la navegación a la información detallada de la pizza
   const handleInfo = (pizzaId) => {
-    navigate(`/pizza/${pizzaId}`)
+    navigate(`/pizza/${pizzaId}`);
   }
 
+  // Función para agregar pizzas al carrito
   const cartAdd = (pizza) => {
-    const existingPizza = cart.find((item) => item.id === pizza.id)
-    if(existingPizza) {
-      existingPizza.quantity = (existingPizza.quantity || 1) + 1
-      setCart([...cart])
+    const existingPizza = cart.find((item) => item.id === pizza.id);
+
+    if (existingPizza) {
+      // Si la pizza ya está en el carrito, incrementar la cantidad
+      existingPizza.quantity = (existingPizza.quantity || 1) + 1;
+      setCart([...cart]);
     } else {
-      setCart([...cart, {...pizza, quantity: 1}])
+      // Si la pizza no está en el carrito, agregarla con cantidad 1
+      setCart([...cart, { ...pizza, quantity: 1 }]);
     }
   }
 
-  const total = cart.reduce((total, pizza) => total + (pizza.price * (pizza.quantity || 1)), 0)
+  // Calcular el total del carrito
+  const total = cart.reduce((total, pizza) => total + (pizza.price * (pizza.quantity || 1)), 0);
 
+  // Actualizar el total a pagar cuando cambie el carrito
   useEffect(() => {
-      setTotalToPay(total)
-  }, [cart])
+    setTotalToPay(total);
+  }, [cart]);
 
   return (
     <>
       <Header />
-
       <div className='d-flex flex-row flex-wrap justify-content-center gap-3 p-4 px-5'>
         {allPizzas.map(pizza => (
           <Card key={pizza.id} style={{ width: '14rem' }}>
-            <Card.Img variant='top' src={pizza.img}/>
+            <Card.Img variant='top' src={pizza.img} />
             <Card.Body>
               <Card.Title>{pizza.name}</Card.Title>
               <ListGroup>
@@ -77,15 +89,16 @@ const Home = () => {
             </Card.Body>
             <Card.Body>
               <Card.Title className='text-center'>Precio: ${(pizza.price).toLocaleString('es-CL')}</Card.Title>
-                <div className='d-flex justify-content-center gap-2'>
-                  <Button onClick={() => handleInfo(pizza.id)} className='bg-info ver-mas'>Ver Más</Button>
-                  <Button onClick={() => cartAdd(pizza)} className='bg-danger'>Añadir</Button>
-                </div>
+              <div className='d-flex justify-content-center gap-2'>
+                <Button onClick={() => handleInfo(pizza.id)} className='bg-info ver-mas'>Ver Más</Button>
+                <Button onClick={() => cartAdd(pizza)} className='bg-danger'>Añadir</Button>
+              </div>
             </Card.Body>
           </Card>
         ))}
       </div>
     </>
-  )
+  );
 };
+
 export default Home;
