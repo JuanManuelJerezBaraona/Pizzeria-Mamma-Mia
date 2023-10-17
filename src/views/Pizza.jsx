@@ -8,6 +8,9 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import ListGroupItem from 'react-bootstrap/ListGroupItem';
 import Button from 'react-bootstrap/Button';
 
+// Notificación de Toastify
+import { toast } from 'react-toastify';
+
 function Pizza() {
     const { allPizzas, cart, setCart } = useContext(UserContext)
     const { id } = useParams()
@@ -28,6 +31,17 @@ function Pizza() {
             // Si la pizza no está en el carrito, agregarla con cantidad 1
             setCart([...cart, {...pizza, quantity: 1}])
         }
+        toast.success('🍕 Agregada al Carrito!', 
+        {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
     }
 
     return (

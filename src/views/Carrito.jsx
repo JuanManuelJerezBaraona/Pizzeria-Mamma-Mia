@@ -34,8 +34,8 @@ function Carrito() {
 
   return (
     <>
-        <div className='p-lg-5 '>
-            <div className='p-lg-5 pt-5 px-2 mb-lg-0 mb-5'>
+        <div className='px-sm-5 mx-sm-5'>
+            <div className='p-md-5 pt-5 px-2 mb-lg-0 mb-5'>
                 <p><b>Detalles del pedido:</b></p>
                 {cart.map((pizza, index) => (
                     <div className='d-flex justify-content-between align-items-center p-3' key={index}>

@@ -12,6 +12,9 @@ import Button from 'react-bootstrap/Button';
 
 import Header from '../components/Header';
 
+// Notificación de Toastify
+import { toast } from 'react-toastify';
+
 const Home = () => {
   // Usar useContext para acceder a datos compartidos del usuario
   const { allPizzas, setAllPizzas, cart, setCart, setTotalToPay } = useContext(UserContext);
@@ -59,6 +62,17 @@ const Home = () => {
       // Si la pizza no está en el carrito, agregarla con cantidad 1
       setCart([...cart, { ...pizza, quantity: 1 }]);
     }
+    toast.success('🍕 Agregada al Carrito!', 
+    {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
   }
 
   // Calcular el total del carrito
