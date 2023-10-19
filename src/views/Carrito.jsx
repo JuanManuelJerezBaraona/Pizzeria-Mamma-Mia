@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 import { toast } from 'react-toastify';
 
 // Sweet Alert 2
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 function Carrito() {
     const { cart, setCart, totalToPay, setTotalToPay } = useContext(UserContext)

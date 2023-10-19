@@ -86,7 +86,7 @@ const Home = () => {
   return (
     <>
       <Header />
-      <div className='d-flex flex-row flex-wrap justify-content-center gap-3 p-4 px-5'>
+      <div className='d-flex flex-row flex-wrap justify-content-center gap-4 p-4 px-5'>
         {allPizzas.map(pizza => (
           <Card key={pizza.id} style={{ width: '14rem' }}>
             <Card.Img variant='top' src={pizza.img} />

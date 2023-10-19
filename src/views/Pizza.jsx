@@ -49,7 +49,7 @@ function Pizza() {
             <div className='p-4'>
                 {pizzaInfo && (
                 <Card className="d-flex flex-lg-row justify-content-center flex-sm-column" key={pizzaInfo.id}>
-                    <Card.Img variant='top' src={pizzaInfo.img}/>
+                    <Card.Img variant='top' src={pizzaInfo.img} />
                     <div className="d-flex flex-column">
                         <Card.Body>
                             <Card.Title className="mb-3">{pizzaInfo.name}</Card.Title>
