@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { UserContext } from '../context/userContext';
 import { useNavigate } from 'react-router-dom';
 
+// Componentes de Bootstrap
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import ListGroupItem from 'react-bootstrap/ListGroupItem';
@@ -25,7 +26,7 @@ function Pizza() {
         const existingPizza = cart.find((item) => item.id === pizza.id)
         if(existingPizza) {
             // Si la pizza ya está en el carrito, incrementar la cantidad
-            existingPizza.quantity = (existingPizza.quantity || 1) + 1
+            existingPizza.quantity = (existingPizza.quantity || 1) + 1 // Gracias a la mutabilidad de los objetos agregué la llave: quantity
             setCart([...cart])
         } else {
             // Si la pizza no está en el carrito, agregarla con cantidad 1
@@ -43,6 +44,10 @@ function Pizza() {
         theme: "colored",
         });
     }
+
+function backButton() {
+    navigate(`/`)
+}     
 
     return (
         <>
@@ -66,6 +71,7 @@ function Pizza() {
                         <Card.Body className="d-flex flex-row align-items-center justify-content-between">
                             <Card.Title className='text-center'>Precio: ${(pizzaInfo.price).toLocaleString('es-CL')}</Card.Title>
                             <div className='d-flex justify-content-center gap-2'>
+                                <Button onClick={() => backButton()} className='bg-info ver-mas'>Atrás</Button>
                                 <Button onClick={() => cartAdd(pizzaInfo)} className='bg-danger'>Añadir</Button>
                             </div>
                         </Card.Body>

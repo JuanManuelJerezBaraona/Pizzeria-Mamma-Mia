@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // Views
 import Home from "./views/Home";
 import Pizza from "./views/Pizza";
-import Carrito from "./views/Carrito";
+import ShoppingCart from "./views/ShoppingCart";
 import NotFound from "./views/NotFound";
 
 // Toastify
@@ -27,14 +27,14 @@ const App = () => {
         />
         <Route
           path="/carrito"
-          element={<Carrito /> }
+          element={<ShoppingCart /> }
         />
         <Route
           path="*"
           element={<NotFound />}
         />
       </Routes>
-      <ToastContainer />
+      <ToastContainer /> {/* Necesario para que funcione Toastify*/}
     </div>
   );
 };

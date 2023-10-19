@@ -1,6 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { UserContext } from '../context/userContext';
 
+// Componente de Bootstrap
 import Button from 'react-bootstrap/Button';
 
 // Notificación de Toastify
@@ -9,7 +10,7 @@ import { toast } from 'react-toastify';
 // Sweet Alert 2
 import Swal from 'sweetalert2';
 
-function Carrito() {
+function ShoppingCart() {
     const { cart, setCart, totalToPay, setTotalToPay } = useContext(UserContext)
 
     const increaseQuantity = (pizzaId) => {
@@ -123,4 +124,4 @@ function Carrito() {
   )
 }
 
-export default Carrito
+export default ShoppingCart
