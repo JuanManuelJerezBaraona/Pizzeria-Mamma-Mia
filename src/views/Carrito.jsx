@@ -3,6 +3,12 @@ import { UserContext } from '../context/userContext';
 
 import Button from 'react-bootstrap/Button';
 
+// Notificación de Toastify
+import { toast } from 'react-toastify';
+
+// Sweet Alert 2
+import Swal from 'sweetalert2'
+
 function Carrito() {
     const { cart, setCart, totalToPay, setTotalToPay } = useContext(UserContext)
 
@@ -13,6 +19,17 @@ function Carrito() {
             : pizza
         )
         setCart(updatedCart)
+        toast.success(`🍕 Pizza Agregada al Carrito!`, 
+        {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
     }
 
     const decreaseQuantity = (pizzaId) => {
@@ -22,10 +39,53 @@ function Carrito() {
             : pizza
        ).filter((pizza) => pizza.quantity > 0) // Filtrar las pizzas con cantidad mayor que 0
        setCart(updatedCart)
+       toast.error(`🍕 Pizza Eliminada del Carrito!`, 
+        {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
     }
 
     // Calcular el total a pagar sumando el precio de todas las pizzas en el carrito.
     const total = cart.reduce((total, pizza) => total + (pizza.price * (pizza.quantity || 1)), 0)
+
+    const payButton = () => {
+        if(totalToPay == 0) {
+            Swal.fire({
+                title: 'No tienes pizzas en tu carrito',
+                text: "",
+                icon: 'warning',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ahora agrego'
+            })
+        } else {
+            Swal.fire({
+                title: '¿Listo para pagar?',
+                text: "Tenemos todos los métodos de pago",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Pagar'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  Swal.fire(
+                    'Conectando con Webpay',
+                    'Elige tu método de pago',
+                    'success'
+                  )
+                }
+              })
+        }
+    };
 
     // Actualizar el total a pagar cuando cambie el carrito.
     useEffect(() => {
@@ -54,7 +114,7 @@ function Carrito() {
                 <div className='d-flex flex-column align-items-lg-start align-items-center'>
                     <h3>Total: ${totalToPay}</h3>
                     <div>
-                        <Button className='bg-success pagar'>Ir a Pagar</Button>
+                        <Button onClick={() => payButton()} className='bg-success pagar'>Ir a Pagar</Button>
                     </div>
                 </div>
             </div>

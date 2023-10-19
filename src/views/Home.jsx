@@ -62,7 +62,7 @@ const Home = () => {
       // Si la pizza no está en el carrito, agregarla con cantidad 1
       setCart([...cart, { ...pizza, quantity: 1 }]);
     }
-    toast.success('🍕 Agregada al Carrito!', 
+    toast.success(`🍕 Pizza ${pizza.name} Agregada al Carrito!`, 
     {
       position: "top-center",
       autoClose: 1000,
